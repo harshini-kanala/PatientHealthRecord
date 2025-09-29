@@ -1,0 +1,16 @@
+PatientID,Name,DoctorID,AdmitDate,DischargeDate,Disease
+101,John Doe,1,2025-09-01,2025-09-05,Heart Disease
+102,Anita Sharma,2,2025-09-02,2025-09-06,Migraine
+103,Rahul Verma,3,2025-09-03,2025-09-07,Fracture
+104,Sonia Kapoor,4,2025-09-04,2025-09-08,Flu
+105,Manish Gupta,5,2025-09-05,2025-09-09,Acne
+106,Priya Singh,6,2025-09-06,2025-09-10,Sinus
+107,Rajesh Kumar,7,2025-09-07,2025-09-11,Diabetes
+108,Neha Reddy,8,2025-09-08,2025-09-12,Thyroid
+109,Sunil Jain,9,2025-09-09,2025-09-13,Cancer
+110,Kavya Menon,10,2025-09-10,2025-09-14,Toothache
+111,Amit Roy,11,2025-09-11,2025-09-15,Kidney Stone
+112,Deepa Nair,12,2025-09-12,2025-09-16,Ulcer
+113,Rohan Desai,13,2025-09-13,2025-09-17,Heart Disease
+114,Meera Joshi,14,2025-09-14,2025-09-18,Migraine
+115,Shruti Iyer,15,2025-09-15,2025-09-19,Flu
