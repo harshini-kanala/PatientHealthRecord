@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+    
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    h2 {
+      color: #4a4a4a;
+      font-weight: 700;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #764ba2;
+      text-align: center;
+    }
+    
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    
+    .table-dark {
+      background: linear-gradient(135deg, #667eea, #764ba2) !important;
+      border: none;
+    }
+    
+    .table-dark th {
+      border: none;
+      padding: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    .table-bordered td, .table-bordered th {
+      border: 1px solid #dee2e6;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(102, 126, 234, 0.05);
+    }
+    
+    .table-striped tbody tr:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+      transform: scale(1.01);
+      transition: all 0.2s ease;
+    }
+    
+    .btn {
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-weight: 600;
+      border: none;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(118, 75, 162, 0.3);
+    }
+    
+    .btn-success {
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
+    
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(40, 167, 69, 0.3);
+    }
+    
+    .btn-info {
+      background: linear-gradient(135deg, #17a2b8, #6f42c1);
+    }
+    
+    .btn-info:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(23, 162, 184, 0.3);
+    }
+    
+    .btn-danger {
+      background: linear-gradient(135deg, #dc3545, #e83e8c);
+    }
+    
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(220, 53, 69, 0.3);
+    }
+    
+    .no-appointments {
+      text-align: center;
+      color: #6c757d;
+      font-size: 1.1rem;
+      padding: 40px;
+      background: rgba(248, 249, 250, 0.8);
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    
+    @media (max-width: 768px) {
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2><i class="fas fa-calendar-day"></i> Appointments for {{today}} </h2>
+    
+    {% if appointments %}
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Department</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in appointments %}
+        <tr>
+          <td>{{ a.name }}</td>
+          <td>{{ a.doctor_name }}</td>
+          <td>{{ a.department }}</td>
+          <td>{{ a.appointment_date.strftime('%H:%M') }}</td>
+          <td>{{ a.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="no-appointments">
+      <i class="fas fa-calendar-times fa-2x mb-3"></i>
+      <p>No appointments today!</p>
+    </div>
+    {% endif %}
+    
+    <div class="button-container">
+      <a href="/add_patient" class="btn btn-primary">
+        <i class="fas fa-user-plus"></i> Add Patient
+      </a>
+      <a href="/generate_bill" class="btn btn-success">
+        <i class="fas fa-file-invoice-dollar"></i> Generate Bill
+      </a>
+      <a href="/view_patients" class="btn btn-info">
+        <i class="fas fa-users"></i> View All Patients
+      </a>
+      <a href="/logout" class="btn btn-danger">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </div>
+</body>
+</html>
