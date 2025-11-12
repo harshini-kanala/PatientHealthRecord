@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Bill</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+    }
+    
+    .form-container {
+      max-width: 600px;
+      width: 100%;
+    }
+    
+    .form-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    h2 {
+      color: #4a4a4a;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #764ba2;
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+    
+    .form-control:focus {
+      border-color: #764ba2;
+      box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+      background: #fff;
+    }
+    
+    label {
+      font-weight: 600;
+      color: #4a4a4a;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-weight: 600;
+      border: none;
+      transition: all 0.3s ease;
+      min-width: 120px;
+    }
+    
+    .btn-success {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(118, 75, 162, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #6c757d;
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    @media (max-width: 576px) {
+      .button-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+    
+    .input-icon {
+      position: relative;
+    }
+    
+    .input-icon .form-control {
+      padding-left: 45px;
+    }
+    
+    .input-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #764ba2;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-card">
+      <h2><i class="fas fa-file-invoice-dollar"></i> Generate Bill</h2>
+      <form method="POST">
+        <div class="form-group">
+          <label>Patient</label>
+          <div class="input-icon">
+            <i class="fas fa-user"></i>
+            <select name="patient_id" class="form-control" required>
+              {% for p in patients %}
+              <option value="{{ p.patient_id }}">{{ p.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Appointment ID</label>
+          <div class="input-icon">
+            <i class="fas fa-calendar-alt"></i>
+            <input type="number" name="appointment_id" class="form-control" placeholder="Appointment ID">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Consultation Fee</label>
+          <div class="input-icon">
+            <i class="fas fa-stethoscope"></i>
+            <input type="number" name="consultation_fee" class="form-control" placeholder="Consultation Fee">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Medicine Charges</label>
+          <div class="input-icon">
+            <i class="fas fa-pills"></i>
+            <input type="number" name="medicine_charges" class="form-control" placeholder="Medicine Charges">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Lab Test Charges</label>
+          <div class="input-icon">
+            <i class="fas fa-flask"></i>
+            <input type="number" name="lab_test_charges" class="form-control" placeholder="Lab Test Charges">
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button class="btn btn-success">
+            <i class="fas fa-file-invoice"></i> Generate
+          </button>
+          <a href="/dashboard" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
